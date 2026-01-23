@@ -2,6 +2,7 @@ package com.orderly.orderly.service.impl;
 
 import com.orderly.orderly.dto.CreateUserRequest;
 import com.orderly.orderly.dto.UpdateUserRequest;
+import com.orderly.orderly.dto.UserResponse;
 import com.orderly.orderly.entity.User;
 import com.orderly.orderly.repository.UserRepository;
 import com.orderly.orderly.service.UserService;
@@ -19,14 +20,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User createUser(CreateUserRequest request){
+    public UserResponse createUser(CreateUserRequest request){
         User user = new User();
 
         user.setName(request.getName());
         user.setEmail(request.getEmail());
         user.setCreatedAt(LocalDateTime.now());
         user.setUpdatedAt(LocalDateTime.now());
-        return repository.save(user);
+
+        User saved = repository.save(user);
+        return new UserResponse(saved.getId(), saved.getName(), saved.getEmail());
     }
 
     @Override

@@ -4,11 +4,11 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public class CreateUserRequest {
-    @NotBlank
+    @NotBlank(message = "Name is Required")
     private String name;
 
-    @NotBlank
-    @Email
+    @NotBlank(message = "Email is Required")
+    @Email(message = "Email is invalid")
     private String email;
 
 

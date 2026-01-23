@@ -2,6 +2,7 @@ package com.orderly.orderly.controller;
 
 import com.orderly.orderly.dto.CreateUserRequest;
 import com.orderly.orderly.dto.UpdateUserRequest;
+import com.orderly.orderly.dto.UserResponse;
 import com.orderly.orderly.entity.User;
 import com.orderly.orderly.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,11 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@Valid @RequestBody CreateUserRequest request) {
-        User user = service.createUser(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody CreateUserRequest request) {
+        UserResponse userRes = service.createUser(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userRes);
     }
+    
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@Valid @RequestBody UpdateUserRequest request) {
 
